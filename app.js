@@ -13,11 +13,9 @@ http.createServer((req, res) => {
 		case '/':
 			//   home lista de peliculas
 
-               let titulo =	" "
-               for (i = 0; i <= 19; i++){     
-
-		    titulo = titulo + "-" + modulo.movies[i].title + "<br>"
-}
+			let titulo =	modulo.movies.map(function(listaTitulos){
+				return (" <br>" + listaTitulos.title )
+			})
 
 			let contain = `
 			
