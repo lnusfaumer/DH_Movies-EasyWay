@@ -49,9 +49,9 @@ http.createServer((req, res) => {
 		case '/en-cartelera':
 
             //    cartelera lista de titulos y reseñas
-			let resena = " "
-			for (i = 0; i <= 19; i++){     
-			 resena += ("-" + modulo.movies[i].title + " :" + "<br>" + modulo.movies[i].overview ) + "<br>"; }
+		let resena = modulo.movies.map(function(titulosReseñas){
+			return ("<br>" + titulosReseñas.title + "<br>" +titulosReseñas.overview )
+	  })
 		   
 		  let containCartelera = 
 		     ` <a href=/ > Home </a>  <div align='center'>  En cartelera </div>
