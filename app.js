@@ -77,17 +77,17 @@ http.createServer((req, res) => {
 
 		case '/mas-votadas':
 
-			let listaPromedioSiete = " "
-			for (i = 0; i <= 19; i++){     
-				if ( modulo.movies[i].vote_average >= 7){ 
-					listaPromedioSiete = 
-					listaPromedioSiete + ("<br>" + modulo.movies[i].title + "<br>"+ modulo.movies[i].vote_average + modulo.movies[i].overview + "<br>");
-				    }}
+			let listaPromedioSiete = modulo.movies.filter(function(todasLasMasVotadas){
+				return  todasLasMasVotadas.vote_average >= 7
+		})
+		let listaDePromedios = listaPromedioSiete.map(function(listaDescripcion){
+			  return "<br>" + " "+ listaDescripcion.title + " -" + " Puntaje:" + " "  + listaDescripcion.vote_average + "<br>" + listaDescripcion.overview ;
+		})
 
 			let containVotadas = `<a href=/ > Home </a>  <div align='center'> Más Votadas  </div>
 			<br>
 			<br>
-			<div align='center'>Total de películas : ${ modulo.votosMas}</div>
+			<div align='center'>Total de películas : ${ listaPromedioSiete.length}</div>
 			<br>
 			<br>
 			<br>
@@ -98,7 +98,7 @@ http.createServer((req, res) => {
 			<div align='center'> 
 			Listados de películas con puntaje mayor a 7: 
 			<br>
-			${listaPromedioSiete}
+			${listaDePromedios}
 			</div>
 		
 			` 
@@ -108,10 +108,11 @@ http.createServer((req, res) => {
 		case '/sucursales':
 
 	// listado nombre y descripcion
-	            let descripcionDeSala = " "
-	            for (i = 0; i <= 3; i++){     
-			   descripcionDeSala = descripcionDeSala + (modulo.theaters[i].name + "<br>" + modulo.theaters[i].address + modulo.theaters[i].description + "<br>");
-                      }
+	     let descripcionDeSala =  modulo.theaters.map(function(salasDisponibles){
+		return "<br>" + "Nombre:"+ " " + salasDisponibles.name  + "<br>" + salasDisponibles.address  
+		+ salasDisponibles.description  ;
+	             })
+
 			let sucursal = `<a href=/ > Home </a> <div align='center'>   Nuestras Salas </div>
 			<br>
 			<br>
